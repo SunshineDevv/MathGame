@@ -54,6 +54,7 @@ class ProcessPageFragment : Fragment() {
 
         val typeOfOperation = args.typeOfOperation
 
+
         if (typeOfOperation == "add") {
             startProgressBar(typeOfOperation)
             binding?.scoreTextView?.text = score.toString()
@@ -65,21 +66,33 @@ class ProcessPageFragment : Fragment() {
         }
 
         if (typeOfOperation == "sub") {
+            startProgressBar(typeOfOperation)
+            binding?.scoreTextView?.text = score.toString()
+            binding?.livesTextView?.text = lives.toString()
             binding?.skipButton?.isVisible = true
             generateQuestionString(typeOfOperation)
             generateAnswerString()
+            checkAnswer(typeOfOperation)
         }
 
         if (typeOfOperation == "mult") {
+            startProgressBar(typeOfOperation)
+            binding?.scoreTextView?.text = score.toString()
+            binding?.livesTextView?.text = lives.toString()
             binding?.skipButton?.isVisible = true
             generateQuestionString(typeOfOperation)
             generateAnswerString()
+            checkAnswer(typeOfOperation)
         }
 
         if (typeOfOperation == "div") {
+            startProgressBar(typeOfOperation)
+            binding?.scoreTextView?.text = score.toString()
+            binding?.livesTextView?.text = lives.toString()
             binding?.skipButton?.isVisible = true
             generateQuestionString(typeOfOperation)
             generateAnswerString()
+            checkAnswer(typeOfOperation)
         }
 
         binding?.closeButton?.setOnClickListener {
@@ -94,14 +107,35 @@ class ProcessPageFragment : Fragment() {
     }
 
     private fun generateQuestionString(typeOfOperation: String) {
-        val number1 = Random.nextInt(0, 100)
-        val number2 = Random.nextInt(0, 100)
+        var number1 = 0
+        var number2 = 0
         var questionStr: String? = null
         when (typeOfOperation) {
-            "add" -> questionStr = "$number1 + $number2 = ?"
-            "sub" -> questionStr = "$number1 - $number2 = ?"
-            "mult" -> questionStr = "$number1 * $number2 = ?"
-            "div" -> questionStr = "$number1 ÷ $number2 = ?"
+            "add" -> {
+                number1 = Random.nextInt(0, 100)
+                number2 = Random.nextInt(0, 100)
+                questionStr = "$number1 + $number2 = ?"
+            }
+
+            "sub" -> {
+                number1 = Random.nextInt(50, 200)
+                number2 = Random.nextInt(0, 100)
+                questionStr = "$number1 - $number2 = ?"
+            }
+
+            "mult" -> {
+                number1 = Random.nextInt(0, 20)
+                number2 = Random.nextInt(0, 11)
+                questionStr = "$number1 * $number2 = ?"
+            }
+
+            "div" -> {
+                do {
+                    number1 = Random.nextInt(1, 101)
+                    number2 = Random.nextInt(1, 20)
+                } while (number1 % number2 != 0)
+                questionStr = "$number1 / $number2 = ?"
+            }
         }
         binding?.questionTextView?.text = questionStr
     }
@@ -114,9 +148,14 @@ class ProcessPageFragment : Fragment() {
 
     private fun generateAnswerString(): Int {
         val resultAnswer = calculateRightAnswer()
-        val randomAnswer1 = Random.nextInt(0, 100)
-        val randomAnswer2 = Random.nextInt(0, 100)
-        val randomAnswer3 = Random.nextInt(0, 100)
+        var randomAnswer1 = 0
+        var randomAnswer2 = 0
+        var randomAnswer3 = 0
+        do {
+            randomAnswer1 = Random.nextInt(50, 150)
+            randomAnswer2 = Random.nextInt(0, 120)
+            randomAnswer3 = Random.nextInt(0, 100)
+        } while (randomAnswer1 == resultAnswer || randomAnswer2 == resultAnswer || randomAnswer3 == resultAnswer)
         val answers = listOf(resultAnswer, randomAnswer1, randomAnswer2, randomAnswer3)
         val shuffledAnswers = answers.shuffled()
         binding?.answerFirst?.text = shuffledAnswers[0].toString()
@@ -138,9 +177,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.resultImageView?.setBackgroundResource(R.drawable.happy_smile)
                 binding?.resultLayout?.setBackgroundColor(Color.parseColor("#21BA39"))
                 binding?.resultLayout?.isVisible = true
-                binding?.secondVariantLayout?.isClickable = false
-                binding?.thirdVariantLayout?.isClickable = false
-                binding?.fourthVariantLayout?.isClickable = false
+                unClickButtons()
                 reloadAllValues(typeOfOperation)
             } else {
                 wrongAnswers++
@@ -151,9 +188,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.resultImageView?.setBackgroundResource(R.drawable.angry_smile)
                 binding?.resultLayout?.setBackgroundColor(Color.parseColor("#FF0000"))
                 binding?.resultLayout?.isVisible = true
-                binding?.secondVariantLayout?.isClickable = false
-                binding?.thirdVariantLayout?.isClickable = false
-                binding?.fourthVariantLayout?.isClickable = false
+                unClickButtons()
                 reloadAllValues(typeOfOperation)
             }
         }
@@ -169,9 +204,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.resultImageView?.setBackgroundResource(R.drawable.happy_smile)
                 binding?.resultLayout?.setBackgroundColor(Color.parseColor("#21BA39"))
                 binding?.resultLayout?.isVisible = true
-                binding?.firstVariantLayout?.isClickable = false
-                binding?.thirdVariantLayout?.isClickable = false
-                binding?.fourthVariantLayout?.isClickable = false
+                unClickButtons()
                 reloadAllValues(typeOfOperation)
             } else {
                 wrongAnswers++
@@ -182,9 +215,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.resultImageView?.setBackgroundResource(R.drawable.angry_smile)
                 binding?.resultLayout?.setBackgroundColor(Color.parseColor("#FF0000"))
                 binding?.resultLayout?.isVisible = true
-                binding?.firstVariantLayout?.isClickable = false
-                binding?.thirdVariantLayout?.isClickable = false
-                binding?.fourthVariantLayout?.isClickable = false
+                unClickButtons()
                 reloadAllValues(typeOfOperation)
             }
         }
@@ -200,9 +231,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.resultImageView?.setBackgroundResource(R.drawable.happy_smile)
                 binding?.resultLayout?.setBackgroundColor(Color.parseColor("#21BA39"))
                 binding?.resultLayout?.isVisible = true
-                binding?.firstVariantLayout?.isClickable = false
-                binding?.secondVariantLayout?.isClickable = false
-                binding?.fourthVariantLayout?.isClickable = false
+                unClickButtons()
                 reloadAllValues(typeOfOperation)
             } else {
                 wrongAnswers++
@@ -213,9 +242,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.resultImageView?.setBackgroundResource(R.drawable.angry_smile)
                 binding?.resultLayout?.setBackgroundColor(Color.parseColor("#FF0000"))
                 binding?.resultLayout?.isVisible = true
-                binding?.firstVariantLayout?.isClickable = false
-                binding?.secondVariantLayout?.isClickable = false
-                binding?.fourthVariantLayout?.isClickable = false
+                unClickButtons()
                 reloadAllValues(typeOfOperation)
             }
         }
@@ -231,9 +258,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.resultImageView?.setBackgroundResource(R.drawable.happy_smile)
                 binding?.resultLayout?.setBackgroundColor(Color.parseColor("#21BA39"))
                 binding?.resultLayout?.isVisible = true
-                binding?.firstVariantLayout?.isClickable = false
-                binding?.secondVariantLayout?.isClickable = false
-                binding?.thirdVariantLayout?.isClickable = false
+                unClickButtons()
                 reloadAllValues(typeOfOperation)
             } else {
                 wrongAnswers++
@@ -244,9 +269,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.resultImageView?.setBackgroundResource(R.drawable.angry_smile)
                 binding?.resultLayout?.setBackgroundColor(Color.parseColor("#FF0000"))
                 binding?.resultLayout?.isVisible = true
-                binding?.firstVariantLayout?.isClickable = false
-                binding?.secondVariantLayout?.isClickable = false
-                binding?.thirdVariantLayout?.isClickable = false
+                unClickButtons()
                 reloadAllValues(typeOfOperation)
             }
         }
@@ -293,18 +316,23 @@ class ProcessPageFragment : Fragment() {
     private fun updateLives(typeOfOperation: String) {
         lives--
         binding?.livesTextView?.text = lives.toString()
-        val action = ProcessPageFragmentDirections.processPageFragmentToEndPageFragment(typeOfOperation,score,correctAnswers,wrongAnswers)
-        if (lives <= 0){
+        val action = ProcessPageFragmentDirections.processPageFragmentToEndPageFragment(
+            typeOfOperation,
+            score,
+            correctAnswers,
+            wrongAnswers
+        )
+        if (lives <= 0) {
             handler.postDelayed({
                 view?.let { Navigation.findNavController(it).navigate(action) }
             }, delayMills)
         }
     }
 
-    private fun startProgressBar(typeOfOperation: String){
-        timer = object : CountDownTimer(startTime,intervalTime){
+    private fun startProgressBar(typeOfOperation: String) {
+        timer = object : CountDownTimer(startTime, intervalTime) {
             override fun onTick(currentTime: Long) {
-                progressTime = (currentTime/1000).toInt()
+                progressTime = (currentTime / 1000).toInt()
                 binding?.progressBar?.progress = progressTime
             }
 
@@ -315,23 +343,30 @@ class ProcessPageFragment : Fragment() {
                 binding?.resultImageView?.setBackgroundResource(R.drawable.happy_smile)
                 binding?.resultLayout?.setBackgroundColor(Color.parseColor("#FD974F"))
                 binding?.resultLayout?.isVisible = true
-                binding?.fourthVariantLayout?.isClickable = false
-                binding?.firstVariantLayout?.isClickable = false
-                binding?.secondVariantLayout?.isClickable = false
-                binding?.thirdVariantLayout?.isClickable = false
+                unClickButtons()
                 reloadAllValues(typeOfOperation)
             }
         }
         timer.start()
     }
 
-    private fun resetProgressBar(){
+    private fun resetProgressBar() {
         timer.cancel()
         timer.start()
     }
 
-    private fun stopProgressBar(){
+    private fun stopProgressBar() {
         timer.cancel()
     }
+
+    private fun unClickButtons() {
+        binding?.firstVariantLayout?.isClickable = false
+        binding?.secondVariantLayout?.isClickable = false
+        binding?.thirdVariantLayout?.isClickable = false
+        binding?.fourthVariantLayout?.isClickable = false
+    }
+
+    private fun startProcess(){}
+
 }
 

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startPageFragment">
+
+    <fragment
+        android:id="@+id/startPageFragment"
+        android:name="com.koliesnikov.mathgame.StartPageFragment"
+        android:label="fragment_start_page"
+        tools:layout="@layout/fragment_start_page" >
+        <action
+            android:id="@+id/startPageFragmentTo_processPageFragment"
+            app:destination="@id/processPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/processPageFragment"
+        android:name="com.koliesnikov.mathgame.ProcessPageFragment"
+        android:label="fragment_process_page"
+        tools:layout="@layout/fragment_process_page" >
+        <action
+            android:id="@+id/processPageFragmentTo_startPageFragment"
+            app:destination="@id/startPageFragment" />
+        <action
+            android:id="@+id/processPageFragmentTo_endPageFragment"
+            app:destination="@id/endPageFragment" />
+        <argument
+            android:name="type_of_operation"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/endPageFragment"
+        android:name="com.koliesnikov.mathgame.EndPageFragment"
+        android:label="fragment_end_page"
+        tools:layout="@layout/fragment_end_page" >
+        <action
+            android:id="@+id/endPageFragmentTo_startPageFragment"
+            app:destination="@id/startPageFragment" />
+        <argument
+            android:name="totalScore"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="correctAnswers"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="wrongAnswers"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="typeOfOperation"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_endPageFragment_to_processPageFragment"
+            app:destination="@id/processPageFragment" />
+    </fragment>
+</navigation>

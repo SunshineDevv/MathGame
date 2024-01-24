@@ -133,16 +133,19 @@ class ProcessPageFragment : Fragment() {
 
     private fun checkAnswer(typeOfOperation: String) {
         binding?.firstVariantLayout?.setOnClickListener {
-            stopProgressBar()
-            binding?.skipButton?.isVisible = false
+            prepareForAnswer()
             if (binding?.answerFirst?.text?.toString() == calculateRightAnswer().toString()) {
                 updateScore()
+                binding?.answerFirst?.setTextColor(Color.parseColor("#21BA39"))
+                binding?.firstVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_correct)
                 setRightAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
             } else {
                 wrongAnswers++
                 updateLives(typeOfOperation)
+                binding?.answerFirst?.setTextColor(Color.parseColor("#FF0000"))
+                binding?.firstVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_wrong)
                 setWrongAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
@@ -150,16 +153,19 @@ class ProcessPageFragment : Fragment() {
         }
 
         binding?.secondVariantLayout?.setOnClickListener {
-            stopProgressBar()
-            binding?.skipButton?.isVisible = false
+            prepareForAnswer()
             if (binding?.answerSecond?.text?.toString() == calculateRightAnswer().toString()) {
                 updateScore()
+                binding?.answerSecond?.setTextColor(Color.parseColor("#21BA39"))
+                binding?.secondVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_correct)
                 setRightAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
             } else {
                 wrongAnswers++
                 updateLives(typeOfOperation)
+                binding?.answerSecond?.setTextColor(Color.parseColor("#FF0000"))
+                binding?.secondVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_wrong)
                 setWrongAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
@@ -167,16 +173,19 @@ class ProcessPageFragment : Fragment() {
         }
 
         binding?.thirdVariantLayout?.setOnClickListener {
-            stopProgressBar()
-            binding?.skipButton?.isVisible = false
+            prepareForAnswer()
             if (binding?.answerThird?.text?.toString() == calculateRightAnswer().toString()) {
                 updateScore()
+                binding?.answerThird?.setTextColor(Color.parseColor("#21BA39"))
+                binding?.thirdVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_correct)
                 setRightAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
             } else {
                 wrongAnswers++
                 updateLives(typeOfOperation)
+                binding?.answerThird?.setTextColor(Color.parseColor("#FF0000"))
+                binding?.thirdVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_wrong)
                 setWrongAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
@@ -184,16 +193,19 @@ class ProcessPageFragment : Fragment() {
         }
 
         binding?.fourthVariantLayout?.setOnClickListener {
-            stopProgressBar()
-            binding?.skipButton?.isVisible = false
+            prepareForAnswer()
             if (binding?.answerFourth?.text?.toString() == calculateRightAnswer().toString()) {
                 updateScore()
+                binding?.answerFourth?.setTextColor(Color.parseColor("#21BA39"))
+                binding?.fourthVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_correct)
                 setRightAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
             } else {
                 wrongAnswers++
                 updateLives(typeOfOperation)
+                binding?.answerFourth?.setTextColor(Color.parseColor("#FF0000"))
+                binding?.fourthVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_wrong)
                 setWrongAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
@@ -256,7 +268,7 @@ class ProcessPageFragment : Fragment() {
     }
 
     private fun startProgressBar(typeOfOperation: String) {
-        timer = object : CountDownTimer(startTime, intervalTime) {
+        timer = object : CountDownTimer(5000, intervalTime) {
             override fun onTick(currentTime: Long) {
                 progressTime = (currentTime / 1000).toInt()
                 binding?.progressBar?.progress = progressTime
@@ -266,7 +278,7 @@ class ProcessPageFragment : Fragment() {
                 updateLives(typeOfOperation)
                 binding?.skipButton?.isVisible = false
                 binding?.resultTextView?.text = "Oops, time is over! "
-                binding?.resultImageView?.setBackgroundResource(R.drawable.happy_smile)
+                binding?.resultImageView?.setBackgroundResource(R.drawable.ic_time_over)
                 binding?.resultLayout?.setBackgroundColor(Color.parseColor("#FD974F"))
                 binding?.resultLayout?.isVisible = true
                 unClickButtons()
@@ -303,8 +315,6 @@ class ProcessPageFragment : Fragment() {
     }
 
     private fun setRightAnswer() {
-        binding?.answerFirst?.setTextColor(Color.parseColor("#21BA39"))
-        binding?.firstVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_correct)
         binding?.resultTextView?.text = "Correct! "
         binding?.resultImageView?.setBackgroundResource(R.drawable.happy_smile)
         binding?.resultLayout?.setBackgroundColor(Color.parseColor("#21BA39"))
@@ -312,12 +322,15 @@ class ProcessPageFragment : Fragment() {
     }
 
     private fun setWrongAnswer() {
-        binding?.answerFirst?.setTextColor(Color.parseColor("#FF0000"))
-        binding?.firstVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_wrong)
         binding?.resultTextView?.text = "Wrong! "
         binding?.resultImageView?.setBackgroundResource(R.drawable.angry_smile)
         binding?.resultLayout?.setBackgroundColor(Color.parseColor("#FF0000"))
         binding?.resultLayout?.isVisible = true
+    }
+
+    private fun prepareForAnswer() {
+        stopProgressBar()
+        binding?.skipButton?.isVisible = false
     }
 
 }

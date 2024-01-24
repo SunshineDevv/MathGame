@@ -285,7 +285,6 @@
             android:layout_width="23dp"
             android:layout_height="23dp"
             android:layout_marginStart="5dp"
-            android:src="@drawable/happy_smile"
             app:layout_constraintBottom_toBottomOf="@+id/resultTextView"
             app:layout_constraintStart_toEndOf="@+id/resultTextView"
             app:layout_constraintTop_toTopOf="@+id/resultTextView" />

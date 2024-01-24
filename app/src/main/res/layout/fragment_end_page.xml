@@ -9,11 +9,11 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:gravity="center_horizontal">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,12 +26,12 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
                 android:fontFamily="@font/manrope"
                 android:text="0"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginEnd="5dp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                 app:layout_constraintEnd_toStartOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="@+id/imageView2">
@@ -54,13 +54,12 @@
                 android:id="@+id/closeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="0"
                 android:src="@drawable/close_sym"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginEnd="8dp">
-            </ImageView>
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -76,9 +75,9 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginTop="65dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="29dp"
@@ -105,9 +104,9 @@
             <ImageView
                 android:layout_width="29dp"
                 android:layout_height="31dp"
+                android:layout_marginStart="8dp"
                 android:background="@color/white"
                 android:src="@drawable/minus_sym"
-                android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -156,9 +155,8 @@
         <ImageView
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:src="@drawable/dead_smile"
-            android:layout_marginTop="10dp">
-        </ImageView>
+            android:layout_marginTop="10dp"
+            android:src="@drawable/dead_smile"></ImageView>
 
         <View
             android:layout_width="240dp"
@@ -171,12 +169,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
             android:fontFamily="@font/manrope"
             android:text="Good result, anyway"
             android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginTop="16sp">
+            android:textSize="20sp">
 
         </TextView>
 
@@ -207,12 +205,11 @@
             <ImageView
                 android:layout_width="21dp"
                 android:layout_height="21dp"
+                android:layout_marginStart="5dp"
                 android:src="@drawable/restart_sym"
                 app:layout_constraintBottom_toBottomOf="@+id/textView2"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toTopOf="@+id/textView2"
-                android:layout_marginStart="5dp">
-            </ImageView>
+                app:layout_constraintTop_toTopOf="@+id/textView2"></ImageView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -227,9 +224,9 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="25dp"
             android:gravity="center"
-            android:layout_marginTop="25dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -238,8 +235,7 @@
                 android:text="Total score: "
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                android:textStyle="bold">
-            </TextView>
+                android:textStyle="bold"></TextView>
 
             <TextView
                 android:id="@+id/totalScoreTextView"
@@ -249,17 +245,16 @@
                 android:text="0"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                android:textStyle="bold">
-            </TextView>
+                android:textStyle="bold"></TextView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:layout_marginTop="10dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -268,8 +263,7 @@
                 android:text="Correct answers: "
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                android:textStyle="bold">
-            </TextView>
+                android:textStyle="bold"></TextView>
 
             <TextView
                 android:id="@+id/totalCorrectAnswersTextView"
@@ -279,17 +273,16 @@
                 android:text="0"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                android:textStyle="bold">
-            </TextView>
+                android:textStyle="bold"></TextView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:layout_marginTop="10dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -298,8 +291,7 @@
                 android:text="Wrong answers: "
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                android:textStyle="bold">
-            </TextView>
+                android:textStyle="bold"></TextView>
 
             <TextView
                 android:id="@+id/totalWrongAnswersTextView"
@@ -309,8 +301,7 @@
                 android:text="0"
                 android:textColor="@color/black"
                 android:textSize="16dp"
-                android:textStyle="bold">
-            </TextView>
+                android:textStyle="bold"></TextView>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -324,8 +315,7 @@
             android:text="Back to menu"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="24sp">
-        </androidx.appcompat.widget.AppCompatButton>
+            android:textSize="24sp"></androidx.appcompat.widget.AppCompatButton>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

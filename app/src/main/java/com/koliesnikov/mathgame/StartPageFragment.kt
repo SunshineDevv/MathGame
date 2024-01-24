@@ -16,7 +16,7 @@ class StartPageFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentStartPageBinding.inflate(inflater,container,false)
+        binding = FragmentStartPageBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
@@ -24,22 +24,26 @@ class StartPageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.additionLayout?.setOnClickListener {
-            val action = StartPageFragmentDirections.startPageFragmentToProcessPageFragment("add")
+            val action =
+                StartPageFragmentDirections.startPageFragmentToProcessPageFragment("addition")
             Navigation.findNavController(view).navigate(action)
         }
 
         binding?.subtractionLayout?.setOnClickListener {
-            val action = StartPageFragmentDirections.startPageFragmentToProcessPageFragment("sub")
+            val action =
+                StartPageFragmentDirections.startPageFragmentToProcessPageFragment("subtraction")
             Navigation.findNavController(view).navigate(action)
         }
 
         binding?.multiplicationLayout?.setOnClickListener {
-            val action = StartPageFragmentDirections.startPageFragmentToProcessPageFragment("mult")
+            val action =
+                StartPageFragmentDirections.startPageFragmentToProcessPageFragment("multiplication")
             Navigation.findNavController(view).navigate(action)
         }
 
         binding?.divisionLayout?.setOnClickListener {
-            val action = StartPageFragmentDirections.startPageFragmentToProcessPageFragment("div")
+            val action =
+                StartPageFragmentDirections.startPageFragmentToProcessPageFragment("division")
             Navigation.findNavController(view).navigate(action)
         }
 

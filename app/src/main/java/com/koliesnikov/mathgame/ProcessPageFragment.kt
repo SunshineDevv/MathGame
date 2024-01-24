@@ -54,45 +54,11 @@ class ProcessPageFragment : Fragment() {
 
         val typeOfOperation = args.typeOfOperation
 
-
-        if (typeOfOperation == "add") {
-            startProgressBar(typeOfOperation)
-            binding?.scoreTextView?.text = score.toString()
-            binding?.livesTextView?.text = lives.toString()
-            binding?.skipButton?.isVisible = true
-            generateQuestionString(typeOfOperation)
-            generateAnswerString()
-            checkAnswer(typeOfOperation)
-        }
-
-        if (typeOfOperation == "sub") {
-            startProgressBar(typeOfOperation)
-            binding?.scoreTextView?.text = score.toString()
-            binding?.livesTextView?.text = lives.toString()
-            binding?.skipButton?.isVisible = true
-            generateQuestionString(typeOfOperation)
-            generateAnswerString()
-            checkAnswer(typeOfOperation)
-        }
-
-        if (typeOfOperation == "mult") {
-            startProgressBar(typeOfOperation)
-            binding?.scoreTextView?.text = score.toString()
-            binding?.livesTextView?.text = lives.toString()
-            binding?.skipButton?.isVisible = true
-            generateQuestionString(typeOfOperation)
-            generateAnswerString()
-            checkAnswer(typeOfOperation)
-        }
-
-        if (typeOfOperation == "div") {
-            startProgressBar(typeOfOperation)
-            binding?.scoreTextView?.text = score.toString()
-            binding?.livesTextView?.text = lives.toString()
-            binding?.skipButton?.isVisible = true
-            generateQuestionString(typeOfOperation)
-            generateAnswerString()
-            checkAnswer(typeOfOperation)
+        when (typeOfOperation) {
+            "addition" -> startProcess(typeOfOperation)
+            "subtraction" -> startProcess(typeOfOperation)
+            "multiplication" -> startProcess(typeOfOperation)
+            "division" -> startProcess(typeOfOperation)
         }
 
         binding?.closeButton?.setOnClickListener {
@@ -111,25 +77,25 @@ class ProcessPageFragment : Fragment() {
         var number2 = 0
         var questionStr: String? = null
         when (typeOfOperation) {
-            "add" -> {
+            "addition" -> {
                 number1 = Random.nextInt(0, 100)
                 number2 = Random.nextInt(0, 100)
                 questionStr = "$number1 + $number2 = ?"
             }
 
-            "sub" -> {
+            "subtraction" -> {
                 number1 = Random.nextInt(50, 200)
                 number2 = Random.nextInt(0, 100)
                 questionStr = "$number1 - $number2 = ?"
             }
 
-            "mult" -> {
+            "multiplication" -> {
                 number1 = Random.nextInt(0, 20)
                 number2 = Random.nextInt(0, 11)
                 questionStr = "$number1 * $number2 = ?"
             }
 
-            "div" -> {
+            "division" -> {
                 do {
                     number1 = Random.nextInt(1, 101)
                     number2 = Random.nextInt(1, 20)
@@ -171,23 +137,13 @@ class ProcessPageFragment : Fragment() {
             binding?.skipButton?.isVisible = false
             if (binding?.answerFirst?.text?.toString() == calculateRightAnswer().toString()) {
                 updateScore()
-                binding?.answerFirst?.setTextColor(Color.parseColor("#21BA39"))
-                binding?.firstVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_correct)
-                binding?.resultTextView?.text = "Correct! "
-                binding?.resultImageView?.setBackgroundResource(R.drawable.happy_smile)
-                binding?.resultLayout?.setBackgroundColor(Color.parseColor("#21BA39"))
-                binding?.resultLayout?.isVisible = true
+                setRightAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
             } else {
                 wrongAnswers++
                 updateLives(typeOfOperation)
-                binding?.answerFirst?.setTextColor(Color.parseColor("#FF0000"))
-                binding?.firstVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_wrong)
-                binding?.resultTextView?.text = "Wrong! "
-                binding?.resultImageView?.setBackgroundResource(R.drawable.angry_smile)
-                binding?.resultLayout?.setBackgroundColor(Color.parseColor("#FF0000"))
-                binding?.resultLayout?.isVisible = true
+                setWrongAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
             }
@@ -198,23 +154,13 @@ class ProcessPageFragment : Fragment() {
             binding?.skipButton?.isVisible = false
             if (binding?.answerSecond?.text?.toString() == calculateRightAnswer().toString()) {
                 updateScore()
-                binding?.answerSecond?.setTextColor(Color.parseColor("#21BA39"))
-                binding?.secondVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_correct)
-                binding?.resultTextView?.text = "Correct! "
-                binding?.resultImageView?.setBackgroundResource(R.drawable.happy_smile)
-                binding?.resultLayout?.setBackgroundColor(Color.parseColor("#21BA39"))
-                binding?.resultLayout?.isVisible = true
+                setRightAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
             } else {
                 wrongAnswers++
                 updateLives(typeOfOperation)
-                binding?.answerSecond?.setTextColor(Color.parseColor("#FF0000"))
-                binding?.secondVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_wrong)
-                binding?.resultTextView?.text = "Wrong! "
-                binding?.resultImageView?.setBackgroundResource(R.drawable.angry_smile)
-                binding?.resultLayout?.setBackgroundColor(Color.parseColor("#FF0000"))
-                binding?.resultLayout?.isVisible = true
+                setWrongAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
             }
@@ -225,23 +171,13 @@ class ProcessPageFragment : Fragment() {
             binding?.skipButton?.isVisible = false
             if (binding?.answerThird?.text?.toString() == calculateRightAnswer().toString()) {
                 updateScore()
-                binding?.answerThird?.setTextColor(Color.parseColor("#21BA39"))
-                binding?.thirdVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_correct)
-                binding?.resultTextView?.text = "Correct! "
-                binding?.resultImageView?.setBackgroundResource(R.drawable.happy_smile)
-                binding?.resultLayout?.setBackgroundColor(Color.parseColor("#21BA39"))
-                binding?.resultLayout?.isVisible = true
+                setRightAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
             } else {
                 wrongAnswers++
                 updateLives(typeOfOperation)
-                binding?.answerThird?.setTextColor(Color.parseColor("#FF0000"))
-                binding?.thirdVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_wrong)
-                binding?.resultTextView?.text = "Wrong! "
-                binding?.resultImageView?.setBackgroundResource(R.drawable.angry_smile)
-                binding?.resultLayout?.setBackgroundColor(Color.parseColor("#FF0000"))
-                binding?.resultLayout?.isVisible = true
+                setWrongAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
             }
@@ -252,23 +188,13 @@ class ProcessPageFragment : Fragment() {
             binding?.skipButton?.isVisible = false
             if (binding?.answerFourth?.text?.toString() == calculateRightAnswer().toString()) {
                 updateScore()
-                binding?.answerFourth?.setTextColor(Color.parseColor("#21BA39"))
-                binding?.fourthVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_correct)
-                binding?.resultTextView?.text = "Correct! "
-                binding?.resultImageView?.setBackgroundResource(R.drawable.happy_smile)
-                binding?.resultLayout?.setBackgroundColor(Color.parseColor("#21BA39"))
-                binding?.resultLayout?.isVisible = true
+                setRightAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
             } else {
                 wrongAnswers++
                 updateLives(typeOfOperation)
-                binding?.answerFourth?.setTextColor(Color.parseColor("#FF0000"))
-                binding?.fourthVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_wrong)
-                binding?.resultTextView?.text = "Wrong! "
-                binding?.resultImageView?.setBackgroundResource(R.drawable.angry_smile)
-                binding?.resultLayout?.setBackgroundColor(Color.parseColor("#FF0000"))
-                binding?.resultLayout?.isVisible = true
+                setWrongAnswer()
                 unClickButtons()
                 reloadAllValues(typeOfOperation)
             }
@@ -366,7 +292,33 @@ class ProcessPageFragment : Fragment() {
         binding?.fourthVariantLayout?.isClickable = false
     }
 
-    private fun startProcess(){}
+    private fun startProcess(typeOfOperation: String) {
+        startProgressBar(typeOfOperation)
+        binding?.scoreTextView?.text = score.toString()
+        binding?.livesTextView?.text = lives.toString()
+        binding?.skipButton?.isVisible = true
+        generateQuestionString(typeOfOperation)
+        generateAnswerString()
+        checkAnswer(typeOfOperation)
+    }
+
+    private fun setRightAnswer() {
+        binding?.answerFirst?.setTextColor(Color.parseColor("#21BA39"))
+        binding?.firstVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_correct)
+        binding?.resultTextView?.text = "Correct! "
+        binding?.resultImageView?.setBackgroundResource(R.drawable.happy_smile)
+        binding?.resultLayout?.setBackgroundColor(Color.parseColor("#21BA39"))
+        binding?.resultLayout?.isVisible = true
+    }
+
+    private fun setWrongAnswer() {
+        binding?.answerFirst?.setTextColor(Color.parseColor("#FF0000"))
+        binding?.firstVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_wrong)
+        binding?.resultTextView?.text = "Wrong! "
+        binding?.resultImageView?.setBackgroundResource(R.drawable.angry_smile)
+        binding?.resultLayout?.setBackgroundColor(Color.parseColor("#FF0000"))
+        binding?.resultLayout?.isVisible = true
+    }
 
 }
 

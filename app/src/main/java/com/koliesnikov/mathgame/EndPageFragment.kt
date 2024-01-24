@@ -18,12 +18,13 @@ class EndPageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentEndPageBinding.inflate(inflater,container,false)
+        binding = FragmentEndPageBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val typeOfOperation = args.typeOfOperation
         val totalScore = args.totalScore
         val correctAnswers = args.correctAnswers
@@ -38,7 +39,8 @@ class EndPageFragment : Fragment() {
         }
 
         binding?.tryAgainButton?.setOnClickListener {
-            val action = EndPageFragmentDirections.actionEndPageFragmentToProcessPageFragment(typeOfOperation)
+            val action =
+                EndPageFragmentDirections.actionEndPageFragmentToProcessPageFragment(typeOfOperation)
             Navigation.findNavController(view).navigate(action)
         }
 

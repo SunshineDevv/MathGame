@@ -42,6 +42,10 @@ class StartPageFragment : Fragment() {
             val action = StartPageFragmentDirections.startPageFragmentToProcessPageFragment("div")
             Navigation.findNavController(view).navigate(action)
         }
+
+        binding?.closeButton?.setOnClickListener {
+            requireActivity().finish()
+        }
     }
 
 }

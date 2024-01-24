@@ -16,6 +16,7 @@ import net.objecthunter.exp4j.ExpressionBuilder
 import kotlin.random.Random
 
 class ProcessPageFragment : Fragment() {
+
     private var binding: FragmentProcessPageBinding? = null
 
     private val args: ProcessPageFragmentArgs by navArgs()

@@ -240,33 +240,37 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/skipButton"
-            android:layout_width="195dp"
-            android:layout_height="45dp"
-            android:layout_marginTop="100dp"
-            android:background="@drawable/button_skip_style"
-            android:fontFamily="@font/caveat"
-            android:text="Skip"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="24sp"
-            android:visibility="gone">
-
-        </androidx.appcompat.widget.AppCompatButton>
-
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/skipButton"
+        android:layout_width="195dp"
+        android:layout_height="45dp"
+        android:background="@drawable/button_skip_style"
+        android:fontFamily="@font/caveat"
+        android:text="Skip"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/resultLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat">
+
+    </androidx.appcompat.widget.AppCompatButton>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/resultLayout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="110dp"
         android:layout_marginTop="92dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat"
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
             android:id="@+id/resultTextView"

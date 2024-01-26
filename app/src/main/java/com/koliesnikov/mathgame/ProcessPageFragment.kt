@@ -268,7 +268,7 @@ class ProcessPageFragment : Fragment() {
     }
 
     private fun startProgressBar(typeOfOperation: String) {
-        timer = object : CountDownTimer(5000, intervalTime) {
+        timer = object : CountDownTimer(startTime, intervalTime) {
             override fun onTick(currentTime: Long) {
                 progressTime = (currentTime / 1000).toInt()
                 binding?.progressBar?.progress = progressTime

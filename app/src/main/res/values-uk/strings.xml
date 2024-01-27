@@ -2,12 +2,12 @@
 <resources>
     <string name="division">Ділення</string>
     <string name="welcome_to">Вітаємо в</string>
-    <string name="math_game">"Math Game "</string>
+    <string name="math_game">"MathGame "</string>
     <string name="learn_math_easily">Вивчай математику з легкістю</string>
     <string name="addition">Додавання</string>
     <string name="subtraction">Віднімання</string>
     <string name="multiplication">Множення</string>
-    <string name="mixed">Змішані</string>
+    <string name="mixed">Змішаний</string>
     <string name="skip">Пропустити</string>
     <string name="variant_4">Відповідь 1</string>
     <string name="variant_3">Відповідь 2</string>
@@ -31,7 +31,7 @@
     <string name="yes">Так</string>
     <string name="are_you_sure_you_want_to_close_the_application">Ви впевнені, що хочете закрити застосунок?</string>
     <string name="close_the_application">Вийти із застосунку?</string>
-    <string name="wrong">"Не правильно! "</string>
+    <string name="wrong">"Неправильно! "</string>
     <string name="correct">"Правильно! "</string>
     <string name="oops_time_is_over">"Ойй, час закінчився! "</string>
     <string name="app_name">MathGame</string>

@@ -47,6 +47,12 @@ class StartPageFragment : Fragment() {
             Navigation.findNavController(view).navigate(action)
         }
 
+        binding?.mixedQuestionsLayout?.setOnClickListener {
+            val action =
+                StartPageFragmentDirections.startPageFragmentToProcessPageFragment("mixed")
+            Navigation.findNavController(view).navigate(action)
+        }
+
         binding?.closeButton?.setOnClickListener {
             requireActivity().finish()
         }

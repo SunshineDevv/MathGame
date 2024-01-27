@@ -59,6 +59,7 @@ class ProcessPageFragment : Fragment() {
             "subtraction" -> startProcess(typeOfOperation)
             "multiplication" -> startProcess(typeOfOperation)
             "division" -> startProcess(typeOfOperation)
+            "mixed" -> startProcess(typeOfOperation)
         }
 
         binding?.closeButton?.setOnClickListener {
@@ -75,6 +76,7 @@ class ProcessPageFragment : Fragment() {
     private fun generateQuestionString(typeOfOperation: String) {
         var number1 = 0
         var number2 = 0
+        var number3 = 0
         var questionStr: String? = null
         when (typeOfOperation) {
             "addition" -> {
@@ -101,6 +103,15 @@ class ProcessPageFragment : Fragment() {
                     number2 = Random.nextInt(1, 20)
                 } while (number1 % number2 != 0)
                 questionStr = "$number1 / $number2 = ?"
+            }
+
+            "mixed" -> {
+                val arithmeticSigns = listOf(" + ", " - ", " * ")
+                val shuffledSigns = arithmeticSigns.shuffled()
+                number1 = Random.nextInt(0, 20)
+                number2 = Random.nextInt(0, 11)
+                number3 = Random.nextInt(-5, 7)
+                questionStr = "$number3${shuffledSigns[0]}$number2${shuffledSigns[1]}$number1"
             }
         }
         binding?.questionTextView?.text = questionStr

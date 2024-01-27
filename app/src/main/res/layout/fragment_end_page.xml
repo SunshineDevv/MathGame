@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:fontFamily="@font/manrope"
-                android:text="0"
+                android:text="@string/_0_"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -42,7 +42,7 @@
                 android:id="@+id/imageView2"
                 android:layout_width="24sp"
                 android:layout_height="23dp"
-                android:src="@drawable/lives_sym"
+                android:src="@drawable/ic_lives"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,10 +56,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0"
-                android:src="@drawable/close_sym"
+                android:src="@drawable/ic_close"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></ImageView>
+                app:layout_constraintTop_toTopOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -83,7 +83,7 @@
                 android:layout_width="29dp"
                 android:layout_height="31dp"
                 android:background="@color/white"
-                android:src="@drawable/plus_sym"
+                android:src="@drawable/ic_plus"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -94,19 +94,17 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/caveat"
                 android:gravity="center"
-                android:text="Oops!"
+                android:text="@string/oops"
                 android:textColor="@color/black"
                 android:textSize="46sp"
-                android:textStyle="bold">
-
-            </TextView>
+                android:textStyle="bold"/>
 
             <ImageView
                 android:layout_width="29dp"
                 android:layout_height="31dp"
                 android:layout_marginStart="8dp"
                 android:background="@color/white"
-                android:src="@drawable/minus_sym"
+                android:src="@drawable/ic_minus"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -123,18 +121,18 @@
                 android:layout_width="41dp"
                 android:layout_height="44dp"
                 android:background="@color/white"
-                android:src="@drawable/division_sym"
+                android:src="@drawable/ic_division"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_width="230dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/caveat"
                 android:gravity="center"
-                android:text="Lives are over"
+                android:text="@string/lives_are_over"
                 android:textColor="@color/black"
                 android:textSize="46sp"
                 android:textStyle="bold">
@@ -145,7 +143,7 @@
                 android:layout_width="41dp"
                 android:layout_height="44dp"
                 android:background="@color/white"
-                android:src="@drawable/multiplication_sym"
+                android:src="@drawable/ic_multiplication"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -156,7 +154,7 @@
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/dead_smile"></ImageView>
+            android:src="@drawable/ic_dead_smile"/>
 
         <View
             android:layout_width="240dp"
@@ -171,7 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16sp"
             android:fontFamily="@font/manrope"
-            android:text="Good result, anyway"
+            android:text="@string/good_result_anyway"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="20sp">
@@ -180,7 +178,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tryAgainButton"
-            android:layout_width="195dp"
+            android:layout_width="240dp"
             android:layout_height="45dp"
             android:layout_marginTop="25dp"
             android:background="@drawable/button_skip_style"
@@ -191,7 +189,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/caveat"
-                android:text="Try again"
+                android:text="@string/try_again"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="24sp"
@@ -206,10 +204,10 @@
                 android:layout_width="21dp"
                 android:layout_height="21dp"
                 android:layout_marginStart="5dp"
-                android:src="@drawable/restart_sym"
+                android:src="@drawable/ic_restart"
                 app:layout_constraintBottom_toBottomOf="@+id/textView2"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toTopOf="@+id/textView2"></ImageView>
+                app:layout_constraintTop_toTopOf="@+id/textView2"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -232,20 +230,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope"
-                android:text="Total score: "
+                android:text="@string/total_score"
                 android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold"></TextView>
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/totalScoreTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope"
-                android:text="0"
+                android:text="@string/_0__"
                 android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold"></TextView>
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -260,20 +258,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope"
-                android:text="Correct answers: "
+                android:text="@string/correct_answers"
                 android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold"></TextView>
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/totalCorrectAnswersTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope"
-                android:text="0"
+                android:text="@string/_0__"
                 android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold"></TextView>
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -288,20 +286,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope"
-                android:text="Wrong answers: "
+                android:text="@string/wrong_answers"
                 android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold"></TextView>
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/totalWrongAnswersTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/manrope"
-                android:text="0"
+                android:text="@string/_0__"
                 android:textColor="@color/black"
-                android:textSize="16dp"
-                android:textStyle="bold"></TextView>
+                android:textSize="16sp"
+                android:textStyle="bold"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -312,10 +310,10 @@
             android:layout_marginTop="70dp"
             android:background="@drawable/button_skip_style"
             android:fontFamily="@font/caveat"
-            android:text="Back to menu"
+            android:text="@string/back_to_menu"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="24sp"></androidx.appcompat.widget.AppCompatButton>
+            android:textSize="24sp"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="division">Ділення</string>
+    <string name="welcome_to">Вітаємо в</string>
+    <string name="math_game">"Math Game "</string>
+    <string name="learn_math_easily">Вивчай математику з легкістю</string>
+    <string name="addition">Додавання</string>
+    <string name="subtraction">Віднімання</string>
+    <string name="multiplication">Множення</string>
+    <string name="mixed">Змішані</string>
+    <string name="skip">Пропустити</string>
+    <string name="variant_4">Відповідь 1</string>
+    <string name="variant_3">Відповідь 2</string>
+    <string name="variant_2">Відповідь 3</string>
+    <string name="variant_1">Відповідь 4</string>
+    <string name="formula">Формула</string>
+    <string name="_0">" 0"</string>
+    <string name="__0">" 0"</string>
+    <string name="score">Бали:</string>
+    <string name="_0_">0</string>
+    <string name="oops">Ойй!</string>
+    <string name="lives_are_over">"Життя скінчилися "</string>
+    <string name="good_result_anyway">Гарний результат</string>
+    <string name="try_again">Спробувати знову</string>
+    <string name="total_score">"Загальний результат: "</string>
+    <string name="_0__">0</string>
+    <string name="correct_answers">"Правильних відповідей: "</string>
+    <string name="wrong_answers">"Неправильних відповідей: "</string>
+    <string name="back_to_menu">Назад до меню</string>
+    <string name="no">Ні</string>
+    <string name="yes">Так</string>
+    <string name="are_you_sure_you_want_to_close_the_application">Ви впевнені, що хочете закрити застосунок?</string>
+    <string name="close_the_application">Вийти із застосунку?</string>
+    <string name="wrong">"Не правильно! "</string>
+    <string name="correct">"Правильно! "</string>
+    <string name="oops_time_is_over">"Ойй, час закінчився! "</string>
+    <string name="app_name">MathGame</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

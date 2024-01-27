@@ -22,10 +22,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/close_sym"
+            android:src="@drawable/ic_close"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></ImageView>
+            app:layout_constraintTop_toTopOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -52,7 +53,7 @@
                 android:layout_height="31dp"
                 android:layout_marginEnd="16dp"
                 android:background="@color/white"
-                android:src="@drawable/plus_sym"
+                android:src="@drawable/ic_plus"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -63,19 +64,17 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/caveat"
                 android:gravity="center"
-                android:text="Welcome to"
+                android:text="@string/welcome_to"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                android:textStyle="bold">
-
-            </TextView>
+                android:textStyle="bold"/>
 
             <ImageView
                 android:layout_width="29dp"
                 android:layout_height="31dp"
                 android:layout_marginStart="17dp"
                 android:background="@color/white"
-                android:src="@drawable/minus_sym"
+                android:src="@drawable/ic_minus"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -93,18 +92,18 @@
                 android:layout_height="44dp"
                 android:layout_marginEnd="5dp"
                 android:background="@color/white"
-                android:src="@drawable/division_sym"
+                android:src="@drawable/ic_division"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/caveat"
                 android:gravity="center"
-                android:text="Math Game"
+                android:text="@string/math_game"
                 android:textColor="@color/black"
                 android:textSize="46sp"
                 android:textStyle="bold">
@@ -114,9 +113,9 @@
             <ImageView
                 android:layout_width="41dp"
                 android:layout_height="44dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="5dp"
                 android:background="@color/white"
-                android:src="@drawable/multiplication_sym"
+                android:src="@drawable/ic_multiplication"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -124,6 +123,7 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <View
+            android:layout_marginTop="5dp"
             android:layout_width="240dp"
             android:layout_height="1dp"
             android:layout_marginBottom="16sp"
@@ -136,7 +136,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/manrope"
-            android:text="Learn math easily"
+            android:text="@string/learn_math_easily"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="20sp">
@@ -168,7 +168,7 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/shape_rounded_default">
+                android:background="@drawable/shape_rounded_default_style">
 
                 <ImageView
                     android:id="@+id/imageViewPlus"
@@ -176,7 +176,7 @@
                     android:layout_height="25dp"
                     android:layout_marginBottom="20sp"
                     android:background="@color/white"
-                    android:src="@drawable/plus_sym"
+                    android:src="@drawable/ic_plus"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -187,9 +187,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="32sp"
                     android:fontFamily="@font/manrope"
-                    android:text="Addition"
+                    android:text="@string/addition"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -203,7 +203,7 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginStart="15dp"
-                android:background="@drawable/shape_rounded_default">
+                android:background="@drawable/shape_rounded_default_style">
 
                 <ImageView
                     android:id="@+id/imageViewMinus"
@@ -211,7 +211,7 @@
                     android:layout_height="25dp"
                     android:layout_marginBottom="20sp"
                     android:background="@color/white"
-                    android:src="@drawable/minus_sym"
+                    android:src="@drawable/ic_minus"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -222,9 +222,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="32sp"
                     android:fontFamily="@font/manrope"
-                    android:text="Subtraction"
+                    android:text="@string/subtraction"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -250,7 +250,7 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/shape_rounded_default">
+                android:background="@drawable/shape_rounded_default_style">
 
                 <ImageView
                     android:id="@+id/imageViewMult"
@@ -258,7 +258,7 @@
                     android:layout_height="25dp"
                     android:layout_marginBottom="20sp"
                     android:background="@color/white"
-                    android:src="@drawable/multiplication_sym"
+                    android:src="@drawable/ic_multiplication"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -269,13 +269,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="32sp"
                     android:fontFamily="@font/manrope"
-                    android:text="Multiplication"
+                    android:text="@string/multiplication"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageViewMult"></TextView>
+                    app:layout_constraintTop_toBottomOf="@+id/imageViewMult"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -284,7 +284,7 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginStart="15dp"
-                android:background="@drawable/shape_rounded_default">
+                android:background="@drawable/shape_rounded_default_style">
 
                 <ImageView
                     android:id="@+id/imageViewDivis"
@@ -292,7 +292,7 @@
                     android:layout_height="25dp"
                     android:layout_marginBottom="20sp"
                     android:background="@color/white"
-                    android:src="@drawable/division_sym"
+                    android:src="@drawable/ic_division"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -303,13 +303,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="32sp"
                     android:fontFamily="@font/manrope"
-                    android:text="Division"
+                    android:text="@string/division"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageViewDivis"></TextView>
+                    app:layout_constraintTop_toBottomOf="@+id/imageViewDivis">
+
+                </TextView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -327,15 +329,15 @@
                 android:id="@+id/mixedQuestionsLayout"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
-                android:background="@drawable/shape_rounded_default">
+                android:background="@drawable/shape_rounded_default_style">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/manrope"
-                    android:text="Mixed"
+                    android:text="@string/mixed"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

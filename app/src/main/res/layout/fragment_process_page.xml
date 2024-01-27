@@ -31,7 +31,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_weight="0"
                 android:fontFamily="@font/manrope"
-                android:text="Score:"
+                android:text="@string/score"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -48,7 +48,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/manrope"
-                android:text=" 0"
+                android:text="@string/__0"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -65,7 +65,7 @@
                 android:layout_marginTop="1dp"
                 android:layout_marginEnd="5dp"
                 android:fontFamily="@font/manrope"
-                android:text=" 0"
+                android:text="@string/_0"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -79,7 +79,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="24sp"
                 android:layout_height="23dp"
-                android:src="@drawable/lives_sym"
+                android:src="@drawable/ic_lives"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/closeButton"
                 app:layout_constraintStart_toStartOf="@+id/textView"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="0"
-                android:src="@drawable/close_sym"
+                android:src="@drawable/ic_close"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -119,9 +119,9 @@
             android:layout_marginTop="85dp"
             android:fontFamily="@font/caveat"
             android:gravity="center"
-            android:text="Formula"
+            android:text="@string/formula"
             android:textSize="28sp"
-            android:textStyle="bold"></TextView>
+            android:textStyle="bold"/>
 
         <View
             android:layout_width="240dp"
@@ -143,16 +143,16 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/shape_rounded_default">
+                android:background="@drawable/shape_rounded_default_style">
 
                 <TextView
                     android:id="@+id/answerFirst"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/manrope"
-                    android:text="Variant 1"
+                    android:text="@string/variant_1"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -166,20 +166,20 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginStart="15dp"
-                android:background="@drawable/shape_rounded_default">
+                android:background="@drawable/shape_rounded_default_style">
 
                 <TextView
                     android:id="@+id/answerSecond"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/manrope"
-                    android:text="Variant 2"
+                    android:text="@string/variant_2"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"></TextView>
+                    app:layout_constraintTop_toTopOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -197,20 +197,20 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginEnd="15dp"
-                android:background="@drawable/shape_rounded_default">
+                android:background="@drawable/shape_rounded_default_style">
 
                 <TextView
                     android:id="@+id/answerThird"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/manrope"
-                    android:text="Variant 3"
+                    android:text="@string/variant_3"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"></TextView>
+                    app:layout_constraintTop_toTopOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -219,16 +219,16 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_marginStart="15dp"
-                android:background="@drawable/shape_rounded_default">
+                android:background="@drawable/shape_rounded_default_style">
 
                 <TextView
                     android:id="@+id/answerFourth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/manrope"
-                    android:text="Variant 4"
+                    android:text="@string/variant_4"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -248,7 +248,7 @@
         android:layout_height="45dp"
         android:background="@drawable/button_skip_style"
         android:fontFamily="@font/caveat"
-        android:text="Skip"
+        android:text="@string/skip"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="24sp"

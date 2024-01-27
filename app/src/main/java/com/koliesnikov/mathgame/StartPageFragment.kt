@@ -1,5 +1,7 @@
 package com.koliesnikov.mathgame
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -54,8 +56,21 @@ class StartPageFragment : Fragment() {
         }
 
         binding?.closeButton?.setOnClickListener {
+            closeApp()
+        }
+    }
+
+    private fun closeApp(){
+        val customDialog = CustomDialog(requireContext())
+
+        customDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        customDialog.setCancelable(false)
+
+        customDialog.onExitButtonClick = {
             requireActivity().finish()
         }
+
+        customDialog.show()
     }
 
 }

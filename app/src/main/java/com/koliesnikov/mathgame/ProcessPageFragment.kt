@@ -1,6 +1,7 @@
 package com.koliesnikov.mathgame
 
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -23,11 +24,11 @@ class ProcessPageFragment : Fragment() {
 
     private val handler = Handler()
 
-    private val delayMills: Long = 2000
-
     private var score = 0
 
     private var lives = 5
+
+    private var delayMills = 2000L
 
     private var startTime = 60000L
 
@@ -62,9 +63,8 @@ class ProcessPageFragment : Fragment() {
             "mixed" -> startProcess(typeOfOperation)
         }
 
-        binding?.closeButton?.setOnClickListener {
-            Navigation.findNavController(view)
-                .navigate(R.id.processPageFragmentTo_startPageFragment)
+        binding?.pauseButton?.setOnClickListener {
+            pauseApp(typeOfOperation)
         }
 
         binding?.skipButton?.setOnClickListener {
@@ -73,8 +73,30 @@ class ProcessPageFragment : Fragment() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    private fun pauseApp(typeOfOperation: String){
+        val customDialogPause = CustomDialogPause(requireContext())
+
+        val delay = 0L
+        customDialogPause.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        customDialogPause.setCancelable(false)
+
+        customDialogPause.onContinueButtonClick = {
+
+        }
+
+        customDialogPause.onHomeButtonClick = {
+            view?.let {
+                Navigation.findNavController(it)
+                    .navigate(R.id.processPageFragmentTo_startPageFragment)
+            }
+        }
+
+        customDialogPause.onRestartButtonClick = {
+            reloadLivesAndScore()
+            reloadAllValues(typeOfOperation, delay)
+        }
+
+        customDialogPause.show()
     }
 
     private fun generateQuestionString(typeOfOperation: String) {
@@ -155,7 +177,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.firstVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_correct_style)
                 setRightAnswer()
                 unClickButtons()
-                reloadAllValues(typeOfOperation)
+                reloadAllValues(typeOfOperation, delayMills)
             } else {
                 wrongAnswers++
                 updateLives(typeOfOperation)
@@ -163,7 +185,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.firstVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_wrong_style)
                 setWrongAnswer()
                 unClickButtons()
-                reloadAllValues(typeOfOperation)
+                reloadAllValues(typeOfOperation, delayMills)
             }
         }
 
@@ -175,7 +197,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.secondVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_correct_style)
                 setRightAnswer()
                 unClickButtons()
-                reloadAllValues(typeOfOperation)
+                reloadAllValues(typeOfOperation, delayMills)
             } else {
                 wrongAnswers++
                 updateLives(typeOfOperation)
@@ -183,7 +205,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.secondVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_wrong_style)
                 setWrongAnswer()
                 unClickButtons()
-                reloadAllValues(typeOfOperation)
+                reloadAllValues(typeOfOperation, delayMills)
             }
         }
 
@@ -195,7 +217,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.thirdVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_correct_style)
                 setRightAnswer()
                 unClickButtons()
-                reloadAllValues(typeOfOperation)
+                reloadAllValues(typeOfOperation, delayMills)
             } else {
                 wrongAnswers++
                 updateLives(typeOfOperation)
@@ -203,7 +225,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.thirdVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_wrong_style)
                 setWrongAnswer()
                 unClickButtons()
-                reloadAllValues(typeOfOperation)
+                reloadAllValues(typeOfOperation, delayMills)
             }
         }
 
@@ -215,7 +237,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.fourthVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_correct_style)
                 setRightAnswer()
                 unClickButtons()
-                reloadAllValues(typeOfOperation)
+                reloadAllValues(typeOfOperation, delayMills)
             } else {
                 wrongAnswers++
                 updateLives(typeOfOperation)
@@ -223,12 +245,12 @@ class ProcessPageFragment : Fragment() {
                 binding?.fourthVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_wrong_style)
                 setWrongAnswer()
                 unClickButtons()
-                reloadAllValues(typeOfOperation)
+                reloadAllValues(typeOfOperation, delayMills)
             }
         }
     }
 
-    private fun reloadAllValues(typeOfOperation: String) {
+    private fun reloadAllValues(typeOfOperation: String, delayMills: Long) {
         handler.postDelayed({
             binding?.firstVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_default_style)
             binding?.answerFirst?.setTextColor(Color.parseColor("#FF000000"))
@@ -250,6 +272,8 @@ class ProcessPageFragment : Fragment() {
 
             binding?.skipButton?.isVisible = true
 
+            binding?.pauseButton?.isClickable = true
+
             resetProgressBar()
 
             generateQuestionString(typeOfOperation)
@@ -258,6 +282,15 @@ class ProcessPageFragment : Fragment() {
 
         }, delayMills)
 
+    }
+
+    private fun reloadLivesAndScore(){
+        score = 0
+        lives = 5
+        correctAnswers = 0
+        wrongAnswers = 0
+        binding?.scoreTextView?.text = score.toString()
+        binding?.livesTextView?.text = lives.toString()
     }
 
     private fun updateScore() {
@@ -297,7 +330,7 @@ class ProcessPageFragment : Fragment() {
                 binding?.resultLayout?.setBackgroundColor(Color.parseColor("#FD974F"))
                 binding?.resultLayout?.isVisible = true
                 unClickButtons()
-                reloadAllValues(typeOfOperation)
+                reloadAllValues(typeOfOperation, delayMills)
             }
         }
         timer.start()
@@ -317,6 +350,8 @@ class ProcessPageFragment : Fragment() {
         binding?.secondVariantLayout?.isClickable = false
         binding?.thirdVariantLayout?.isClickable = false
         binding?.fourthVariantLayout?.isClickable = false
+
+        binding?.pauseButton?.isClickable = false
     }
 
     private fun startProcess(typeOfOperation: String) {

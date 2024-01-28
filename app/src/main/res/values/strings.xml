@@ -36,4 +36,6 @@
     <string name="wrong">"Wrong! "</string>
     <string name="correct">"Correct! "</string>
     <string name="oops_time_is_over">"Oops, time is over! "</string>
+    <string name="pause">Pause</string>
+    <string name="the_application_is_paused_do_you_want_to_continue">The application is paused. Do you want to continue?</string>
 </resources>

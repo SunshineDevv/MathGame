@@ -73,7 +73,7 @@ class ProcessPageFragment : Fragment() {
         }
     }
 
-    private fun pauseApp(typeOfOperation: String){
+    private fun pauseApp(typeOfOperation: String) {
         stopProgressBar()
         val customDialogPause = CustomDialogPause(requireContext())
 
@@ -285,7 +285,7 @@ class ProcessPageFragment : Fragment() {
 
     }
 
-    private fun reloadLivesAndScore(){
+    private fun reloadLivesAndScore() {
         score = 0
         lives = 5
         correctAnswers = 0
@@ -339,7 +339,7 @@ class ProcessPageFragment : Fragment() {
 
     private fun resetProgressBar(typeOfOperation: String, startTime: Long) {
         timer?.cancel()
-        startProgressBar(typeOfOperation,startTime)
+        startProgressBar(typeOfOperation, startTime)
     }
 
     private fun stopProgressBar() {

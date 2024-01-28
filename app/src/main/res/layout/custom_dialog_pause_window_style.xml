@@ -57,6 +57,8 @@
                 android:text="The application is paused. Do you want to continue?"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

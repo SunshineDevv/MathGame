@@ -34,13 +34,13 @@ class ProcessPageFragment : Fragment() {
 
     private var intervalTime = 1000L
 
-    private var progressTime = 0
+    private var interruptedTime: Long? = null
 
     private var correctAnswers = 0
 
     private var wrongAnswers = 0
 
-    private lateinit var timer: CountDownTimer
+    private var timer: CountDownTimer? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,6 +74,7 @@ class ProcessPageFragment : Fragment() {
     }
 
     private fun pauseApp(typeOfOperation: String){
+        stopProgressBar()
         val customDialogPause = CustomDialogPause(requireContext())
 
         val delay = 0L
@@ -81,7 +82,7 @@ class ProcessPageFragment : Fragment() {
         customDialogPause.setCancelable(false)
 
         customDialogPause.onContinueButtonClick = {
-
+            interruptedTime?.let { startProgressBar(typeOfOperation, it) }
         }
 
         customDialogPause.onHomeButtonClick = {
@@ -274,7 +275,7 @@ class ProcessPageFragment : Fragment() {
 
             binding?.pauseButton?.isClickable = true
 
-            resetProgressBar()
+            resetProgressBar(typeOfOperation, startTime)
 
             generateQuestionString(typeOfOperation)
 
@@ -315,11 +316,11 @@ class ProcessPageFragment : Fragment() {
         }
     }
 
-    private fun startProgressBar(typeOfOperation: String) {
+    private fun startProgressBar(typeOfOperation: String, startTime: Long) {
         timer = object : CountDownTimer(startTime, intervalTime) {
             override fun onTick(currentTime: Long) {
-                progressTime = (currentTime / 1000).toInt()
-                binding?.progressBar?.progress = progressTime
+                interruptedTime = currentTime
+                binding?.progressBar?.progress = (currentTime / 1000).toInt()
             }
 
             override fun onFinish() {
@@ -333,16 +334,16 @@ class ProcessPageFragment : Fragment() {
                 reloadAllValues(typeOfOperation, delayMills)
             }
         }
-        timer.start()
+        timer?.start()
     }
 
-    private fun resetProgressBar() {
-        timer.cancel()
-        timer.start()
+    private fun resetProgressBar(typeOfOperation: String, startTime: Long) {
+        timer?.cancel()
+        startProgressBar(typeOfOperation,startTime)
     }
 
     private fun stopProgressBar() {
-        timer.cancel()
+        timer?.cancel()
     }
 
     private fun unClickButtons() {
@@ -355,7 +356,7 @@ class ProcessPageFragment : Fragment() {
     }
 
     private fun startProcess(typeOfOperation: String) {
-        startProgressBar(typeOfOperation)
+        startProgressBar(typeOfOperation, startTime)
         binding?.scoreTextView?.text = score.toString()
         binding?.livesTextView?.text = lives.toString()
         binding?.skipButton?.isVisible = true

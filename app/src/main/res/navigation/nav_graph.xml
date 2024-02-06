@@ -37,21 +37,6 @@
         <action
             android:id="@+id/endPageFragmentTo_startPageFragment"
             app:destination="@id/startPageFragment" />
-        <argument
-            android:name="totalScore"
-            app:argType="integer"
-            android:defaultValue="0" />
-        <argument
-            android:name="correctAnswers"
-            app:argType="integer"
-            android:defaultValue="0" />
-        <argument
-            android:name="wrongAnswers"
-            app:argType="integer"
-            android:defaultValue="0" />
-        <argument
-            android:name="typeOfOperation"
-            app:argType="string" />
         <action
             android:id="@+id/action_endPageFragment_to_processPageFragment"
             app:destination="@id/processPageFragment" />

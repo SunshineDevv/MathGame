@@ -1,5 +1,7 @@
 package com.koliesnikov.mathgame
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -42,6 +44,7 @@ class ProcessPageFragment : Fragment() {
 
     private var timer: CountDownTimer? = null
 
+    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -302,18 +305,30 @@ class ProcessPageFragment : Fragment() {
 
     private fun updateLives(typeOfOperation: String) {
         lives--
+
         binding?.livesTextView?.text = lives.toString()
-        val action = ProcessPageFragmentDirections.processPageFragmentToEndPageFragment(
-            typeOfOperation,
-            score,
-            correctAnswers,
-            wrongAnswers
-        )
+
         if (lives <= 0) {
+            saveEndPageData(typeOfOperation)
             handler.postDelayed({
-                view?.let { Navigation.findNavController(it).navigate(action) }
+                view?.let { Navigation.findNavController(it).navigate(R.id.processPageFragmentTo_endPageFragment) }
+                reloadLivesAndScore()
             }, delayMills)
         }
+    }
+
+    private fun saveEndPageData(typeOfOperation: String){
+        sharedPreferences = requireActivity().getSharedPreferences("saveData", Context.MODE_PRIVATE)
+
+        val editor = sharedPreferences.edit()
+
+        editor.putString("key_score", score.toString())
+        editor.putString("key_correct", correctAnswers.toString())
+        editor.putString("key_wrong", wrongAnswers.toString())
+
+        editor.putString("key_operation", typeOfOperation)
+
+        editor.apply()
     }
 
     private fun startProgressBar(typeOfOperation: String, startTime: Long) {
@@ -357,9 +372,11 @@ class ProcessPageFragment : Fragment() {
 
     private fun startProcess(typeOfOperation: String) {
         startProgressBar(typeOfOperation, startTime)
+
         binding?.scoreTextView?.text = score.toString()
         binding?.livesTextView?.text = lives.toString()
         binding?.skipButton?.isVisible = true
+
         generateQuestionString(typeOfOperation)
         generateAnswerString()
         checkAnswer(typeOfOperation)
@@ -381,6 +398,7 @@ class ProcessPageFragment : Fragment() {
 
     private fun prepareForAnswer() {
         stopProgressBar()
+
         binding?.skipButton?.isVisible = false
     }
 

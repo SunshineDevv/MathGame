@@ -37,5 +37,5 @@
     <string name="app_name">MathGame</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pause">Пауза</string>
-    <string name="the_application_is_paused_do_you_want_to_continue">Додаток призупинено. Ви хочете продовжити?</string>
+    <string name="the_application_is_paused_do_you_want_to_continue">The application is paused. Do you want to continue?</string>
 </resources>

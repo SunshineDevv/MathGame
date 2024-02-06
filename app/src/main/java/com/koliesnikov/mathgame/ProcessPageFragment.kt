@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -45,6 +46,13 @@ class ProcessPageFragment : Fragment() {
     private var timer: CountDownTimer? = null
 
     private lateinit var sharedPreferences: SharedPreferences
+
+    private var processStopped: Boolean = false
+
+    private var operationTypeSaved: String? = null
+
+    private var dialogShown: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,6 +84,58 @@ class ProcessPageFragment : Fragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        saveProcessPageData()
+        processStopped = true
+        stopProgressBar()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (processStopped && !dialogShown){
+            resumeApp()
+            operationTypeSaved?.let { pauseApp(it) }
+            processStopped = false
+//            Log.i("Test delay", remainingDelay.toString())
+        }
+    }
+
+    private fun resumeApp(){
+        sharedPreferences = requireActivity().getSharedPreferences("saveDataProcess", Context.MODE_PRIVATE)
+
+        binding?.scoreTextView?.text = sharedPreferences.getString("score", "0")
+        binding?.livesTextView?.text = sharedPreferences.getString("lives", "0")
+        interruptedTime = sharedPreferences.getLong("time", 0L)
+        binding?.questionTextView?.text = sharedPreferences.getString("question", "0")
+        binding?.answerFirst?.text = sharedPreferences.getString("answer_one", "0")
+        binding?.answerSecond?.text = sharedPreferences.getString("answer_two", "0")
+        binding?.answerThird?.text = sharedPreferences.getString("answer_three", "0")
+        binding?.answerFourth?.text = sharedPreferences.getString("answer_four", "0")
+
+        operationTypeSaved = sharedPreferences.getString("type_operation", "")
+    }
+
+    private fun saveProcessPageData(){
+        sharedPreferences = requireActivity().getSharedPreferences("saveDataProcess", Context.MODE_PRIVATE)
+
+        val editor = sharedPreferences.edit()
+
+        editor.putString("score", binding?.scoreTextView?.text.toString())
+        editor.putString("lives", binding?.livesTextView?.text.toString())
+        interruptedTime?.let { editor.putLong("time", it) }
+        editor.putString("question", binding?.questionTextView?.text.toString())
+        editor.putString("answer_one", binding?.answerFirst?.text.toString())
+        editor.putString("answer_two", binding?.answerSecond?.text.toString())
+        editor.putString("answer_three", binding?.answerThird?.text.toString())
+        editor.putString("answer_four", binding?.answerFourth?.text.toString())
+
+        editor.putString("type_operation", args.typeOfOperation)
+
+        editor.apply()
+    }
+
+
     private fun pauseApp(typeOfOperation: String) {
         stopProgressBar()
         val customDialogPause = CustomDialogPause(requireContext())
@@ -86,6 +146,7 @@ class ProcessPageFragment : Fragment() {
 
         customDialogPause.onContinueButtonClick = {
             interruptedTime?.let { startProgressBar(typeOfOperation, it) }
+            Log.i("Test", interruptedTime.toString())
         }
 
         customDialogPause.onHomeButtonClick = {
@@ -100,7 +161,12 @@ class ProcessPageFragment : Fragment() {
             reloadAllValues(typeOfOperation, delay)
         }
 
+        customDialogPause.setOnDismissListener {
+            dialogShown = false
+        }
+
         customDialogPause.show()
+        dialogShown = true
     }
 
     private fun generateQuestionString(typeOfOperation: String) {
@@ -255,6 +321,7 @@ class ProcessPageFragment : Fragment() {
     }
 
     private fun reloadAllValues(typeOfOperation: String, delayMills: Long) {
+        stopProgressBar()
         handler.postDelayed({
             binding?.firstVariantLayout?.setBackgroundResource(R.drawable.shape_rounded_default_style)
             binding?.answerFirst?.setTextColor(Color.parseColor("#FF000000"))
@@ -278,14 +345,14 @@ class ProcessPageFragment : Fragment() {
 
             binding?.pauseButton?.isClickable = true
 
-            resetProgressBar(typeOfOperation, startTime)
-
+            if(!processStopped){
+                resetProgressBar(typeOfOperation, startTime)
+            }
             generateQuestionString(typeOfOperation)
 
             generateAnswerString()
 
         }, delayMills)
-
     }
 
     private fun reloadLivesAndScore() {
@@ -317,24 +384,11 @@ class ProcessPageFragment : Fragment() {
         }
     }
 
-    private fun saveEndPageData(typeOfOperation: String){
-        sharedPreferences = requireActivity().getSharedPreferences("saveData", Context.MODE_PRIVATE)
-
-        val editor = sharedPreferences.edit()
-
-        editor.putString("key_score", score.toString())
-        editor.putString("key_correct", correctAnswers.toString())
-        editor.putString("key_wrong", wrongAnswers.toString())
-
-        editor.putString("key_operation", typeOfOperation)
-
-        editor.apply()
-    }
-
     private fun startProgressBar(typeOfOperation: String, startTime: Long) {
         timer = object : CountDownTimer(startTime, intervalTime) {
             override fun onTick(currentTime: Long) {
                 interruptedTime = currentTime
+                Log.i("Test", interruptedTime.toString())
                 binding?.progressBar?.progress = (currentTime / 1000).toInt()
             }
 
@@ -398,9 +452,23 @@ class ProcessPageFragment : Fragment() {
 
     private fun prepareForAnswer() {
         stopProgressBar()
-
         binding?.skipButton?.isVisible = false
     }
+
+    private fun saveEndPageData(typeOfOperation: String){
+        sharedPreferences = requireActivity().getSharedPreferences("saveData", Context.MODE_PRIVATE)
+
+        val editor = sharedPreferences.edit()
+
+        editor.putString("key_score", score.toString())
+        editor.putString("key_correct", correctAnswers.toString())
+        editor.putString("key_wrong", wrongAnswers.toString())
+
+        editor.putString("key_operation", typeOfOperation)
+
+        editor.apply()
+    }
+
 
 }
 

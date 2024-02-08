@@ -53,6 +53,8 @@ class ProcessPageFragment : Fragment() {
 
     private var dialogShown: Boolean = false
 
+    private var isCheckingAnswers = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -93,44 +95,64 @@ class ProcessPageFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (processStopped && !dialogShown){
+        if (processStopped && !dialogShown) {
             resumeApp()
             operationTypeSaved?.let { pauseApp(it) }
             processStopped = false
-//            Log.i("Test delay", remainingDelay.toString())
         }
     }
 
-    private fun resumeApp(){
-        sharedPreferences = requireActivity().getSharedPreferences("saveDataProcess", Context.MODE_PRIVATE)
+    private fun resumeApp() {
+        sharedPreferences =
+            requireActivity().getSharedPreferences("saveDataProcess", Context.MODE_PRIVATE)
+        Log.i("Testt", "$isCheckingAnswers before resume")
+        if (!isCheckingAnswers) {
+            binding?.scoreTextView?.text = sharedPreferences.getString("score", "0")
+            binding?.livesTextView?.text = sharedPreferences.getString("lives", "0")
+            interruptedTime = sharedPreferences.getLong("time", 0L)
+            binding?.questionTextView?.text = sharedPreferences.getString("question", "0")
+            binding?.answerFirst?.text = sharedPreferences.getString("answer_one", "0")
+            binding?.answerSecond?.text = sharedPreferences.getString("answer_two", "0")
+            binding?.answerThird?.text = sharedPreferences.getString("answer_three", "0")
+            binding?.answerFourth?.text = sharedPreferences.getString("answer_four", "0")
 
-        binding?.scoreTextView?.text = sharedPreferences.getString("score", "0")
-        binding?.livesTextView?.text = sharedPreferences.getString("lives", "0")
-        interruptedTime = sharedPreferences.getLong("time", 0L)
-        binding?.questionTextView?.text = sharedPreferences.getString("question", "0")
-        binding?.answerFirst?.text = sharedPreferences.getString("answer_one", "0")
-        binding?.answerSecond?.text = sharedPreferences.getString("answer_two", "0")
-        binding?.answerThird?.text = sharedPreferences.getString("answer_three", "0")
-        binding?.answerFourth?.text = sharedPreferences.getString("answer_four", "0")
+            operationTypeSaved = sharedPreferences.getString("type_operation", "")
+        } else {
+            binding?.progressBar?.progress = 60
+            binding?.scoreTextView?.text = sharedPreferences.getString("score", "0")
+            binding?.livesTextView?.text = sharedPreferences.getString("lives", "0")
+            operationTypeSaved = sharedPreferences.getString("type_operation", "")
+            interruptedTime = sharedPreferences.getLong("time", 0L)
+            operationTypeSaved?.let { reloadAllValues(it, 0L) }
+            isCheckingAnswers = false
+        }
 
-        operationTypeSaved = sharedPreferences.getString("type_operation", "")
+        Log.i("Testt", "${isCheckingAnswers.toString()} after resumeApp")
     }
 
-    private fun saveProcessPageData(){
-        sharedPreferences = requireActivity().getSharedPreferences("saveDataProcess", Context.MODE_PRIVATE)
+    private fun saveProcessPageData() {
+        sharedPreferences =
+            requireActivity().getSharedPreferences("saveDataProcess", Context.MODE_PRIVATE)
 
         val editor = sharedPreferences.edit()
+        Log.i("Testt", "$isCheckingAnswers before save")
+        if (!isCheckingAnswers) {
+            editor.putString("score", binding?.scoreTextView?.text.toString())
+            editor.putString("lives", binding?.livesTextView?.text.toString())
+            interruptedTime?.let { editor.putLong("time", it) }
+            editor.putString("question", binding?.questionTextView?.text.toString())
+            editor.putString("answer_one", binding?.answerFirst?.text.toString())
+            editor.putString("answer_two", binding?.answerSecond?.text.toString())
+            editor.putString("answer_three", binding?.answerThird?.text.toString())
+            editor.putString("answer_four", binding?.answerFourth?.text.toString())
 
-        editor.putString("score", binding?.scoreTextView?.text.toString())
-        editor.putString("lives", binding?.livesTextView?.text.toString())
-        interruptedTime?.let { editor.putLong("time", it) }
-        editor.putString("question", binding?.questionTextView?.text.toString())
-        editor.putString("answer_one", binding?.answerFirst?.text.toString())
-        editor.putString("answer_two", binding?.answerSecond?.text.toString())
-        editor.putString("answer_three", binding?.answerThird?.text.toString())
-        editor.putString("answer_four", binding?.answerFourth?.text.toString())
-
-        editor.putString("type_operation", args.typeOfOperation)
+            editor.putString("type_operation", args.typeOfOperation)
+        } else {
+            editor.putString("score", binding?.scoreTextView?.text.toString())
+            editor.putString("lives", binding?.livesTextView?.text.toString())
+            editor.putString("type_operation", args.typeOfOperation)
+            editor.putLong("time", startTime)
+        }
 
         editor.apply()
     }
@@ -345,9 +367,10 @@ class ProcessPageFragment : Fragment() {
 
             binding?.pauseButton?.isClickable = true
 
-            if(!processStopped){
+            if (!processStopped && isCheckingAnswers) {
                 resetProgressBar(typeOfOperation, startTime)
             }
+
             generateQuestionString(typeOfOperation)
 
             generateAnswerString()
@@ -378,17 +401,20 @@ class ProcessPageFragment : Fragment() {
         if (lives <= 0) {
             saveEndPageData(typeOfOperation)
             handler.postDelayed({
-                view?.let { Navigation.findNavController(it).navigate(R.id.processPageFragmentTo_endPageFragment) }
+                view?.let {
+                    Navigation.findNavController(it)
+                        .navigate(R.id.processPageFragmentTo_endPageFragment)
+                }
                 reloadLivesAndScore()
             }, delayMills)
         }
     }
 
+
     private fun startProgressBar(typeOfOperation: String, startTime: Long) {
         timer = object : CountDownTimer(startTime, intervalTime) {
             override fun onTick(currentTime: Long) {
                 interruptedTime = currentTime
-                Log.i("Test", interruptedTime.toString())
                 binding?.progressBar?.progress = (currentTime / 1000).toInt()
             }
 
@@ -453,9 +479,11 @@ class ProcessPageFragment : Fragment() {
     private fun prepareForAnswer() {
         stopProgressBar()
         binding?.skipButton?.isVisible = false
+        isCheckingAnswers = true
+//        Log.i("Testt", "$isCheckingAnswers answer")
     }
 
-    private fun saveEndPageData(typeOfOperation: String){
+    private fun saveEndPageData(typeOfOperation: String) {
         sharedPreferences = requireActivity().getSharedPreferences("saveData", Context.MODE_PRIVATE)
 
         val editor = sharedPreferences.edit()
